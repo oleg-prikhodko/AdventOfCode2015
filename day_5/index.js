@@ -2,9 +2,7 @@ const { readFile } = require("fs").promises;
 const { join } = require("path");
 
 function hasThreeVowels(str) {
-  const match = str.match(/[aeiou]/g);
-  if (match) return match.length >= 3;
-  return false;
+  return /([aeiou].*){3}/.test(str);
 }
 
 function hasDoubleLetter(str) {
@@ -12,7 +10,7 @@ function hasDoubleLetter(str) {
 }
 
 function doesNotContainSpecified(str) {
-  return !/ab|cd|pq|or|xy/.test(str);
+  return !/ab|cd|pq|xy/.test(str);
 }
 
 function conditionsMet(str) {
