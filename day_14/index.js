@@ -10,6 +10,8 @@ class Reindeer {
 
         this.cycle = this.travel + this.rest
         this.distancePerCycle = this.travel * this.speed
+
+        this.points = 0
     }
     tick(time) {
         const fullCycles = Math.floor(time / this.cycle)
@@ -28,8 +30,20 @@ const reindeers = contents.split("\n").map(line => {
     return new Reindeer(name, parseInt(speed), parseInt(travel), parseInt(rest))
 })
 
-const limit = 2503
+const sortByDistance = (a, b) => b.distance - a.distance
+const sortByPoints = (a, b) => b.points - a.points
 
-reindeers.forEach(deer => deer.tick(limit))
-reindeers.sort((a, b) => b.distance - a.distance)
-console.log(reindeers[0].distance)
+const limit = 2503
+let time = 1
+
+while (time <= limit) {
+    reindeers.forEach(deer => deer.tick(time))
+    reindeers.sort(sortByDistance)
+    const leaders = reindeers.filter(deer => deer.distance === reindeers[0].distance)
+    leaders.forEach(deer => deer.points++)
+    time++
+}
+
+console.log("Part one", reindeers[0].distance)
+reindeers.sort(sortByPoints)
+console.log("Part two", reindeers[0].points)
