@@ -37,10 +37,10 @@ function nodesFromInstructions (instructions) {
   for (let instruction of instructions) {
     const [expression, id] = instruction.split(' -> ')
     if (binaryOp.test(expression)) {
-      const [_, dep1, op, dep2] = binaryOp.exec(expression)
+      const [, dep1, op, dep2] = binaryOp.exec(expression)
       nodes.set(id, new Node(operators[op], dep1, dep2))
     } else if (unaryOp.test(expression)) {
-      const [_, op, dep] = unaryOp.exec(expression)
+      const [, op, dep] = unaryOp.exec(expression)
       nodes.set(id, new Node(operators[op], dep))
     } else {
       nodes.set(id, new Node(operators.DUMMY, expression))

@@ -47,7 +47,7 @@ readFile(path.join(__dirname, 'input.txt'), 'utf8').then(contents => {
     }
   }
   for (let instruction of instructions) {
-    const [_, command, start, end] = /([a-z ]+) (\d{1,3},\d{1,3}) (?:[a-z]+) (\d{1,3},\d{1,3})/.exec(instruction)
+    const [, command, start, end] = /([a-z ]+) (\d{1,3},\d{1,3}) (?:[a-z]+) (\d{1,3},\d{1,3})/.exec(instruction)
     const [rowStart, colStart] = start.split(',').map(value => parseInt(value))
     const [rowEnd, colEnd] = end.split(',').map(value => parseInt(value))
     const lightBlock = lights.getLightBlock(rowStart, colStart, rowEnd, colEnd)

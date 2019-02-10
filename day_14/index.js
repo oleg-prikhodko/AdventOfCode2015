@@ -26,7 +26,7 @@ class Reindeer {
 
 const contents = readFileSync(join(__dirname, 'input.txt'), 'utf8').trim()
 const reindeers = contents.split('\n').map(line => {
-  const [_, name, speed, travel, rest] = /(\w+) .+ (\d{1,2}) .+ (\d{1,2}) .+ (\d{2,3})/.exec(line)
+  const [, name, speed, travel, rest] = /(\w+) .+ (\d{1,2}) .+ (\d{1,2}) .+ (\d{2,3})/.exec(line)
   return new Reindeer(name, parseInt(speed), parseInt(travel), parseInt(rest))
 })
 

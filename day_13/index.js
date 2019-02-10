@@ -8,14 +8,14 @@ const happinessTable = new Map()
 const linePattern = /(\w+) would (.+) happiness .+ (\w+)\./
 
 function getIntegerHappinessChange (change) {
-  let [_, sign, value] = /(\w+) (\d+)/.exec(change)
+  let [, sign, value] = /(\w+) (\d+)/.exec(change)
   value = parseInt(value)
   if (sign === 'lose') value = -value
   return value
 }
 
 for (let line of contents.split('\n')) {
-  const [_, person, change, neighbour] = linePattern.exec(line)
+  const [, person, change, neighbour] = linePattern.exec(line)
   persons.add(person)
   happinessTable.set(
     `${person} ${neighbour}`,

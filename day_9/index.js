@@ -6,7 +6,7 @@ const contents = readFileSync(join(__dirname, 'input.txt'), 'utf8').trim()
 const edges = new Map()
 const locations = new Set()
 contents.split('\n').forEach(line => {
-  const [_, from, to, distance] = /(\w+) to (\w+) = (\d+)/.exec(line)
+  const [, from, to, distance] = /(\w+) to (\w+) = (\d+)/.exec(line)
   locations.add(from)
   locations.add(to)
   edges.set(`${from} ${to}`, parseInt(distance))
