@@ -26,9 +26,21 @@ for (let aunt of auntStrings) {
 
   let allTraitsCoincide = true
   for (let trait of Object.keys(auntTraits)) {
-    if (targetTraits[trait] !== auntTraits[trait]) {
-      allTraitsCoincide = false
-      break
+    if (trait === 'cats' || trait === 'trees') {
+      if (auntTraits[trait] <= targetTraits[trait]) {
+        allTraitsCoincide = false
+        break
+      }
+    } else if (trait === 'pomeranians' || trait === 'goldfish') {
+      if (auntTraits[trait] >= targetTraits[trait]) {
+        allTraitsCoincide = false
+        break
+      }
+    } else {
+      if (targetTraits[trait] !== auntTraits[trait]) {
+        allTraitsCoincide = false
+        break
+      }
     }
   }
   if (allTraitsCoincide) suitableAunts.set(auntIndex, auntTraits)
