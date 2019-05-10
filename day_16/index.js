@@ -20,27 +20,30 @@ const auntStrings = contents.split('\n')
 
 const suitableAunts = new Map()
 
+const equals = (value1, value2) => value1 === value2
+const less = (value1, value2) => value1 < value2
+const more = (value1, value2) => value1 > value2
+
+function getComparator (trait, part = 1) {
+  if (part === 1) return equals
+  if (trait === 'cats' || trait === 'trees') {
+    return more
+  } else if (trait === 'pomeranians' || trait === 'goldfish') {
+    return less
+  } else {
+    return equals
+  }
+}
+
 for (let aunt of auntStrings) {
   let [, auntIndex, auntTraits] = auntPattern.exec(aunt)
   auntTraits = eval(`({${auntTraits}})`)
-
   let allTraitsCoincide = true
+
   for (let trait of Object.keys(auntTraits)) {
-    if (trait === 'cats' || trait === 'trees') {
-      if (auntTraits[trait] <= targetTraits[trait]) {
-        allTraitsCoincide = false
-        break
-      }
-    } else if (trait === 'pomeranians' || trait === 'goldfish') {
-      if (auntTraits[trait] >= targetTraits[trait]) {
-        allTraitsCoincide = false
-        break
-      }
-    } else {
-      if (targetTraits[trait] !== auntTraits[trait]) {
-        allTraitsCoincide = false
-        break
-      }
+    if (!getComparator(trait, 2)(auntTraits[trait], targetTraits[trait])) {
+      allTraitsCoincide = false
+      break
     }
   }
   if (allTraitsCoincide) suitableAunts.set(auntIndex, auntTraits)
