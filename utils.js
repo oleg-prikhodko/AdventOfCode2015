@@ -48,4 +48,4 @@ function * pairs (arr) {
   }
 }
 
-module.exports = { range, swap, permute, pairs }
+module.exports = { range, permute, pairs }
