@@ -1,12 +1,8 @@
 const { readFile } = require('fs').promises
+const { range } = require('../utils')
 const path = require('path')
 
 const SIZE = 1000
-
-function * range (from, to) {
-  let number = from
-  while (number < to) yield number++
-}
 
 class LightArray extends Array {
   getLightBlock (rowStart, colStart, rowEnd, colEnd) {
