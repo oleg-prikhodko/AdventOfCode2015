@@ -48,4 +48,28 @@ function * pairs (arr) {
   }
 }
 
-module.exports = { range, permute, pairs }
+/**
+ * Returns all possible combinations of size 'k' from 'arr'
+ * @param {*[]} arr Input array
+ * @param {number} k Combination length
+ * @return {*[]}
+ * @example
+ * console.log(combine([1,2,3],2)) // [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ]
+ */
+function combine (arr, k) {
+  if (k === 1) return arr.map(comboOption => [comboOption])
+
+  const combinations = []
+
+  arr.forEach((currentElement, currentIndex) => {
+    const smallerCombinations = combine(arr.slice(currentIndex + 1), k - 1)
+
+    smallerCombinations.forEach(combination => {
+      combinations.push([currentElement].concat(combination))
+    })
+  })
+
+  return combinations
+}
+
+module.exports = { range, permute, pairs, combine }
