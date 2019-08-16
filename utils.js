@@ -5,13 +5,16 @@
  * @example
  * console.log([...range(0,3)]) // [ 0, 1, 2 ]
  */
-function * range (start, limit) {
+function * range (start, end, step = 1) {
   let counter = start
-  while (counter < limit) yield counter++
+  while (counter < end) {
+    yield counter
+    counter += step
+  }
 }
 
 function swap (arr, i, j) {
-  let temp = arr[i]
+  const temp = arr[i]
   arr[i] = arr[j]
   arr[j] = temp
 }
@@ -27,7 +30,7 @@ function swap (arr, i, j) {
 function * permute (arr, left = 0, right = arr.length - 1) {
   arr = [...arr]
   if (left === right) yield arr
-  for (let i of range(left, right + 1)) {
+  for (const i of range(left, right + 1)) {
     swap(arr, left, i)
     yield * permute(arr, left + 1, right)
     swap(arr, left, i)
